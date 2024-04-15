@@ -40,8 +40,8 @@ def list(request):
         python_data = JSONParser().parse(stream)
         id = python_data.get('id')
         stu = User.objects.get(id=id)
-        serializer = UserSerializer(stu, data=python_data, partial = True)
-        # serializer = UserSerializer(stu, data=python_data)
+        # serializer = UserSerializer(stu, data=python_data, partial = True)
+        serializer = UserSerializer(stu, data=python_data)
         if serializer.is_valid():
             serializer.save()
             res = {'msg':'Data Updated !!'}
@@ -69,7 +69,7 @@ def list(request):
         json_data = request.body
         stream = io.BytesIO(json_data)
         python_data = JSONParser().parse(stream)
-        id = python_data.filter('id')
+        id = python_data.get('id')
         if id:
             stu = User.objects.get(id=id)
             stu.delete()
