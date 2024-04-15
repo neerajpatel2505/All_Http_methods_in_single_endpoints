@@ -69,7 +69,7 @@ def list(request):
         json_data = request.body
         stream = io.BytesIO(json_data)
         python_data = JSONParser().parse(stream)
-        id = python_data.get('id')
+        id = python_data.filter('id')
         if id:
             stu = User.objects.get(id=id)
             stu.delete()
